@@ -38,4 +38,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the phone associated with the user.
+     */
+    public function pilih()
+    {
+        return $this->hasOne(UserPilih::class, 'user_id', 'id');
+    }
 }

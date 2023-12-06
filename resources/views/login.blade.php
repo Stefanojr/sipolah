@@ -69,11 +69,11 @@
                             <a class="nav-link" aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/register"
-                                rel="nofollow" target="_blank">Account</a>
+                            <a class="nav-link" href="/register" rel="nofollow" target="_blank">Account</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="https://mdbootstrap.com/docs/standard/" target="_blank">Contact</a>
+                            <a class="nav-link" href="https://mdbootstrap.com/docs/standard/"
+                                target="_blank">Contact</a>
                         </li>
                     </ul>
 
@@ -115,31 +115,38 @@
                     <div class="row justify-content-center">
                         <div class="col-xl-5 col-md-8">
                             @if (session('flash_berhasil'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ session('flash_berhasil') }}</strong> Silahkan Lanjut Login
-                                    {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"> --}}
-                                        {{-- <span aria-hidden="true">&times;</span> --}}
-                                    </button>
-                                </div>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session('flash_berhasil') }}</strong> Silahkan Lanjut Login
+                                {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"> --}}
+                                    {{-- <span aria-hidden="true">&times;</span> --}}
+                                </button>
+                            </div>
                             @endif
 
                             @if (session('success'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{ session('success') }}</strong> Silahkan Lanjut Login
-                                    {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"> --}}
-                                        {{-- <span aria-hidden="true">&times;</span> --}}
-                                    </button>
-                                </div>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session('success') }}</strong> Silahkan Lanjut Login
+                                {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"> --}}
+                                    {{-- <span aria-hidden="true">&times;</span> --}}
+                                </button>
+                            </div>
                             @endif
 
+                            @if ($errors->any())
+                            <div class="alert alert-danger" role="alert">
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </div>
+                            @endif
 
-
-                            <form class="bg-white rounded shadow-5-strong p-5" action="/postlogin" method="POST">
+                            <form class="bg-white rounded shadow-5-strong p-5" action="{{ route('postlogin') }}"
+                                method="POST">
                                 @csrf
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="form1Example1">Email address</label>
-                                    <input type="email" id="form1Example1" class="form-control" name="email"/>
+                                    <input type="email" id="form1Example1" class="form-control" name="email" />
 
                                 </div>
 
@@ -155,8 +162,8 @@
                                     <div class="col d-flex justify-content-center">
                                         <!-- Checkbox -->
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="form1Example3" checked />
+                                            <input class="form-check-input" type="checkbox" value="" id="form1Example3"
+                                                checked />
                                             <label class="form-check-label" for="form1Example3">
                                                 Remember me
                                             </label>

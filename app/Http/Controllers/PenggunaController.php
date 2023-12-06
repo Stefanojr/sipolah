@@ -8,22 +8,33 @@ use App\Charts\PieChartDashboard;
 use App\buangsampah;
 use App\User;
 use App\Http\Controllers\Hash;
-
+use App\UserPilih;
+use Illuminate\Support\Facades\Validator;
 
 class PenggunaController extends Controller
 {
     public function index()
     {
         $chart = new PieChartDashboard();
-        return view('pengguna/dashboard', ['chart'=>$chart]);
+        return view('pengguna/dashboard', ['chart' => $chart]);
     }
 
 
-    public function buang(){
-        return view('pengguna/buangsampah');
+    public function buang()
+    {
+        $dataPetugas = User::find(Auth::user()->pilih->petugas_id)->first();
+
+        return view('pengguna/buangsampah', [
+            'dataPetugas' => $dataPetugas,
+        ]);
     }
 
     public function payment()
+    {
+        return view('pengguna/payment');
+    }
+
+    public function postPayment(Request $request)
     {
         return view('pengguna/payment');
     }
@@ -37,7 +48,7 @@ class PenggunaController extends Controller
     {
         return view('pengguna/history');
     }
-   
+
     public function profile()
     {
         return view('pengguna/profile');
@@ -62,32 +73,71 @@ class PenggunaController extends Controller
     }
 
     public function updateProfile(Request $request)
-{
-    // dd($request->all()); // Debugging line
-    // dd($request->validated()); // Add this line for debugging
-    // Ambil user berdasarkan ID
-    $user = User::find(auth()->user()->id);
+    {
+        // dd($request->all()); // Debugging line
+        // dd($request->validated()); // Add this line for debugging
+        // Ambil user berdasarkan ID
+        $user = User::find(auth()->user()->id);
 
-    // Validasi data yang diinputkan user
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'username' => 'required|string|max:255|unique:users,username,' . $user->id,
-        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-        'nomorhp' => 'required|string|max:255',
-        'password' => 'required|string|min:8|confirmed',
-    ]);
+        // Validasi data yang diinputkan user
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'nomorhp' => 'required|string|max:255',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
 
-    // Update data user
-    $user->update([
-        'name' => $request->input('name'),
-        'username' => $request->input('username'),
-        'email' => $request->input('email'),
-        'nomorhp' => $request->input('nomorhp'),
-        'password' => bcrypt($request->input('password')),
-    ]);
+        // Update data user
+        $user->update([
+            'name' => $request->input('name'),
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'nomorhp' => $request->input('nomorhp'),
+            'password' => bcrypt($request->input('password')),
+        ]);
 
-    return redirect('/profile')->with('profil_berhasil', 'Profile Berhasil Diubah');
-}
+        return redirect('/profile')->with('profil_berhasil', 'Profile Berhasil Diubah');
+    }
 
+    /**
+     *
+     */
+    public function pilih()
+    {
+        $dataPetugas = User::where('role', 'petugas')->get();
 
+        return view('pengguna.pilih', [
+            'dataPetugas'   => $dataPetugas,
+            // 'dataLangganan' => $dataLangganan,
+        ]);
+    }
+
+    /**
+     *
+     */
+    public function postPilih(Request $request)
+    {
+        // $validator = $request->validate([
+        //     'username' => ['required', 'string'],
+        //     'password' => ['required', 'string'],
+        // ]);
+
+        $validator = Validator::make($request->all(), [
+            'petugas'   => 'required',
+            'langganan' => 'required',
+        ]);
+
+        $data = UserPilih::create([
+            'user_id'    => Auth::user()->id,
+            'petugas_id' => $request->petugas,
+            'langganan'  => $request->langganan,
+        ]);
+
+        // return view('pengguna.pilih');
+
+        return redirect()->route('pengguna.pilih')->with([
+            'status' => 'Berhasil menambahkan',
+        ]);
+    }
 }

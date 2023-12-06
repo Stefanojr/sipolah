@@ -20,11 +20,12 @@
 
 
 </head>
-<body>
 
+<body>
     <nav class="navbar navbar-light bg-light justify-content-between">
         <a class="navbar-brand" href="/pengguna"><strong>SIPOLAH</strong></a>
-            <a class="btn btn-dark" Style="background-color: #7386D5" href="/logout" role="button"><i class="bi bi-door-closed-fill"></i> Logout</a>
+        <a class="btn btn-dark" Style="background-color: #7386D5" href="/logout" role="button"><i
+                class="bi bi-door-closed-fill"></i> Logout</a>
         </div>
 
     </nav>
@@ -44,6 +45,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="/pilih">
+                        <i class="bi bi-recycle"></i>
+                        <strong>Pilih Petugas</strong>
+                    </a>
+                </li>
+                <li>
                     <a href="/buangsampah">
                         <i class="bi bi-recycle"></i>
                         <strong>Buang Sampah</strong>
@@ -51,7 +58,7 @@
                 </li>
                 <li>
                     <a href="/payment">
-                        <i class="bi bi-credit-card" id="payment" ></i>
+                        <i class="bi bi-credit-card" id="payment"></i>
                         <strong>Payment</strong>
                     </a>
                 </li>
@@ -71,7 +78,8 @@
 
         </nav>
         <div class="navbar-header margin-top">
-            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn " style="background-color: #7386D5">
+            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn "
+                style="background-color: #7386D5">
                 <i class="bi bi-list"></i>
             </button>
         </div>
@@ -118,7 +126,7 @@
         }
     </script>
 
-@yield('chart')
+    @yield('chart')
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

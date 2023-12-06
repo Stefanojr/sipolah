@@ -25,16 +25,22 @@ Route::get('/login', 'pageController@login')->name('login'); // Menambahkan name
 Route::get('/register', 'pageController@register');
 
 Route::post('/postregister', 'GeneralController@postregister');
-Route::post('/postlogin', 'GeneralController@postlogin');
+Route::post('/postlogin', 'GeneralController@postlogin')->name("postlogin");
 
 Route::middleware('cekrole:pengguna')->group(function () {
 
     Route::post('/update-rolePg', [PenggunaController::class, 'updateRolePg'])->name('update-rolePg');
     Route::get('/pengguna', 'PenggunaController@index');
     Route::get('/buangsampah', 'PenggunaController@buang');
+
     Route::get('/payment', 'PenggunaController@payment');
+    Route::post('/payment', 'PenggunaController@postPayment')->name('payment.proccess');
+
     Route::get('/location', 'PenggunaController@location');
     Route::get('/history', 'PenggunaController@history');
+
+    Route::get('pilih', 'PenggunaController@pilih')->name('pengguna.pilih');
+    Route::post('pilih', 'PenggunaController@postPilih')->name('pengguna.add');
 
     Route::get('/profile', 'PenggunaController@profile');
     Route::get('/logout', 'PenggunaController@logout');

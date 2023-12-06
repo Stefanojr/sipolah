@@ -24,25 +24,32 @@ class GeneralController extends Controller
 
     public function postlogin(Request $request)
     {
-        $datalogin = [
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
-        if (Auth::attempt($datalogin)) {
-            if (Auth::user()->role == 'petugas') {
-                return redirect('/petugas/');
-            } elseif (Auth::user()->role == 'banksampah') {
-                return redirect('/banksampah/');
-            }elseif (Auth::user()->role == 'pengguna') {
-                return redirect('/pengguna/');
-            }
-             else {
-                // Authentication failed
-                return redirect('/login');
-            }
+        // $datalogin = [
+        //     'email'    => $request->email,
+        //     'password' => $request->password,
+        // ];
+
+        $datalogin = $request->only('email', 'password');
+
+        if (!Auth::attempt($datalogin)) {
+            return back()->withErrors([
+                'message' => 'Username dan Password Yang Dimasukan Salah',
+            ])->onlyInput('username');
         }
 
-
+        switch (Auth::user()->role) {
+            case "petugas":
+                // return redirect('/petugas/');
+                return redirect()->intended('petugas');
+                break;
+            case "banksampah":
+                return redirect('/banksampah/');
+                break;
+            case "pengguna":
+                return redirect('/pengguna/');
+                break;
+            default:
+                return redirect('/login');
+        };
     }
 }
-
