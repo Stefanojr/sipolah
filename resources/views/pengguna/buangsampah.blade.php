@@ -96,12 +96,11 @@
             <div class="mb-3">
                 <label for="maps" class="form-label">Pilih Lokasi Bank Sampah</label>
 
-                <!-- Bootstrap CSS -->
-                <link rel="stylesheet" href="{{ asset('css/maps.css') }}">
-
                 <title>Maps</title>
-                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-                <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+                    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+                <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
                 <style>
                     #map-canvas {
                         width: 100%;
@@ -113,11 +112,36 @@
                 <body>
                     <div id="map-canvas"></div>
                     <script>
-                        var map = L.map('map-canvas').setView([-7.785943619482843, 110.37836300972296], 8);
-                                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                    attribution: '&copy; <a href="https://www.google.com/maps/@-7.7860654,110.377561,18.55z?entry=ttu">OpenStreetMap</a> contributors'
-                                }).addTo(map);
+                        var map = L.map('map-canvas').setView([0, 0], 30);
+
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; <a href="https://www.google.com/maps/@-7.7860654,110.377561,18.55z?entry=ttu">OpenStreetMap</a> contributors'
+                        }).addTo(map);
+
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            var lat = position.coords.latitude;
+                            var lon = position.coords.longitude;
+
+                            console.log("lat: " + lat);
+                            console.log("lon: " + lon);
+
+                            map.setView([lat, lon], 18);
+                            var userLocation = L.marker([lat, lon]).addTo(map);
+                            userLocation.bindPopup('You are here!').openPopup();
+                        });
+
+                        var iconUrls = [
+                            'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                            'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                            'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+                            'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+                        ];
+
+                        var locations = <?php echo json_encode($banksampah); ?>;
+
+
                     </script>
+
                     <!-- Bootstrap JS -->
                     <script src="{{ asset('js/buang.js') }}"></script>
                 </body>

@@ -17,8 +17,9 @@ class User extends Authenticatable
      */
 
     protected $table = 'users';
+
     protected $fillable = [
-        'name', 'username', 'email','nomorhp', 'role', 'password',
+        'name', 'username', 'email', 'nomorhp', 'role', 'password',
     ];
 
     /**
@@ -42,8 +43,16 @@ class User extends Authenticatable
     /**
      * Get the phone associated with the user.
      */
-    public function pilih()
+    public function langganan()
     {
-        return $this->hasOne(UserPilih::class, 'user_id', 'id');
+        return $this->hasOne(UserLangganan::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get the phone associated with the user.
+     */
+    public function petugas()
+    {
+        return $this->hasOne(UserLangganan::class, 'petugas_id', 'id');
     }
 }

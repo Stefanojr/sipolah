@@ -50,12 +50,14 @@
                         <strong>Pilih Petugas</strong>
                     </a>
                 </li>
+                @if (!empty(Auth::user()->langganan))
                 <li>
                     <a href="/buangsampah">
                         <i class="bi bi-recycle"></i>
                         <strong>Buang Sampah</strong>
                     </a>
                 </li>
+                @endif
                 <li>
                     <a href="/payment">
                         <i class="bi bi-credit-card" id="payment"></i>

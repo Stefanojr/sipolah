@@ -8,7 +8,7 @@ use App\Charts\PieChartDashboard;
 use App\buangsampah;
 use App\User;
 use App\Http\Controllers\Hash;
-use App\UserPilih;
+use App\UserLangganan;
 use Illuminate\Support\Facades\Validator;
 
 class PenggunaController extends Controller
@@ -22,10 +22,16 @@ class PenggunaController extends Controller
 
     public function buang()
     {
-        $dataPetugas = User::find(Auth::user()->pilih->petugas_id)->first();
+        if (empty(Auth::user()->langganan)) {
+            return redirect()->route('pengguna.pilih');
+        }
+
+        $dataPetugas = User::find(Auth::user()->langganan->petugas_id)->first();
+        $banksampah = User::where('role', 'banksampah')->get();
 
         return view('pengguna/buangsampah', [
             'dataPetugas' => $dataPetugas,
+            'banksampah'  => $banksampah,
         ]);
     }
 
@@ -105,6 +111,7 @@ class PenggunaController extends Controller
      */
     public function pilih()
     {
+
         $dataPetugas = User::where('role', 'petugas')->get();
 
         return view('pengguna.pilih', [
@@ -118,23 +125,16 @@ class PenggunaController extends Controller
      */
     public function postPilih(Request $request)
     {
-        // $validator = $request->validate([
-        //     'username' => ['required', 'string'],
-        //     'password' => ['required', 'string'],
-        // ]);
-
         $validator = Validator::make($request->all(), [
             'petugas'   => 'required',
             'langganan' => 'required',
         ]);
 
-        $data = UserPilih::create([
+        $data = UserLangganan::create([
             'user_id'    => Auth::user()->id,
             'petugas_id' => $request->petugas,
-            'langganan'  => $request->langganan,
+            'type'       => $request->type,
         ]);
-
-        // return view('pengguna.pilih');
 
         return redirect()->route('pengguna.pilih')->with([
             'status' => 'Berhasil menambahkan',

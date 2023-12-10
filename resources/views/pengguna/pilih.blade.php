@@ -59,10 +59,11 @@
         </div>
         @endif
 
-        @if (!empty(Auth::user()->pilih))
+        @if (!empty(Auth::user()->langganan))
+
         <div class="mb-3">
             <label for="name" class="form-label">Status Langganan</label>
-            @switch(Auth::user()->pilih->langganan)
+            @switch(Auth::user()->langganan->type)
             @case(2)
             <input type="text" class="form-control" name="nominal" value="Rp. 120,000" readonly>
             @break
@@ -92,8 +93,8 @@
             </div>
             <br>
 
-            <label for="langganan">Pilih Langganan :</label>
-            <select id="langganan" name="langganan">
+            <label for="type">Pilih Langganan :</label>
+            <select id="type" name="type">
                 <option value="1">1 bulan / Rp. 65,000</option>
                 <option value="2">2 bulan / Rp. 120,000</option>
                 <option value="3">3 bulan / Rp. 180,000</option>
@@ -106,9 +107,6 @@
             </div>
         </form>
         @endif
-        @csrf
-        <form action="buangsampah" method="get" action="/buangsampah" id="buangsampah">
-        <button type="submit" class="btn btn-primary" onclick="showAlert()">Next</button>
 
         <script>
             function showAlert() {

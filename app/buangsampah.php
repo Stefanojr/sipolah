@@ -20,7 +20,14 @@ class buangsampah extends Authenticatable
 
 
     protected $fillable = [
-        'name', 'nomorhp', 'email', 'jenis','berat', 'tanggal','alamat'
+        'nomorhp',
+        'name',
+        'email',
+        'kapasitas_organik',
+        'kapasitas_anorganik',
+        'tanggal',
+        'latitude_pengambilan',
+        'longitude_pengambilan',
     ];
 
     /**

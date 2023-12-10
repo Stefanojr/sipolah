@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserPilih extends Model
+class UserLangganan extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'users_pilih';
+    protected $table = 'users_langganan';
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +21,6 @@ class UserPilih extends Model
     protected $fillable = [
         'user_id',
         'petugas_id',
-        'langganan',
+        'type',
     ];
 }
