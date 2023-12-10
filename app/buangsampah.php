@@ -20,6 +20,8 @@ class buangsampah extends Authenticatable
 
 
     protected $fillable = [
+        'user_id',
+        'petugas_id',
         'nomorhp',
         'name',
         'email',
@@ -47,4 +49,12 @@ class buangsampah extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the phone associated with the user.
+     */
+    public function petugas()
+    {
+        return $this->hasOne(User::class, 'id', 'petugas_id');
+    }
 }

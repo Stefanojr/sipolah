@@ -27,11 +27,9 @@ class PenggunaController extends Controller
         }
 
         $dataPetugas = User::find(Auth::user()->langganan->petugas_id)->first();
-        $banksampah = User::where('role', 'banksampah')->get();
 
         return view('pengguna/buangsampah', [
             'dataPetugas' => $dataPetugas,
-            'banksampah'  => $banksampah,
         ]);
     }
 
@@ -52,7 +50,11 @@ class PenggunaController extends Controller
 
     public function history()
     {
-        return view('pengguna/history');
+        $datas = buangsampah::where('user_id', Auth::user()->id)->get();
+
+        return view('pengguna/history', [
+            'datas' => $datas,
+        ]);
     }
 
     public function profile()
@@ -80,30 +82,43 @@ class PenggunaController extends Controller
 
     public function updateProfile(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name'     => 'required',
+            'username' => 'required',
+            'email' => 'required',
+        ]);
+
         // dd($request->all()); // Debugging line
         // dd($request->validated()); // Add this line for debugging
         // Ambil user berdasarkan ID
         $user = User::find(auth()->user()->id);
 
         // Validasi data yang diinputkan user
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'nomorhp' => 'required|string|max:255',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+        //     'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+        //     'nomorhp' => 'required|string|max:255',
+        //     'password' => 'required|string|min:8|confirmed',
+        // ]);
 
-        // Update data user
-        $user->update([
-            'name' => $request->input('name'),
-            'username' => $request->input('username'),
-            'email' => $request->input('email'),
-            'nomorhp' => $request->input('nomorhp'),
-            'password' => bcrypt($request->input('password')),
-        ]);
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->save();
 
-        return redirect('/profile')->with('profil_berhasil', 'Profile Berhasil Diubah');
+        // $user->update([
+        //     'name'     => $request->input('name'),
+        //     'username' => $request->input('username'),
+        //     'email'    => $request->input('email'),
+        //     'nomorhp'  => $request->input('nomorhp'),
+        //     'password' => bcrypt($request->input('password')),
+        // ]);
+
+        // return redirect('/profile')->with('profil_berhasil', 'Profile Berhasil Diubah');
+        return back()->with([
+            'success' => 'berhasil',
+        ]);
     }
 
     /**

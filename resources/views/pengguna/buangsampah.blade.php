@@ -137,7 +137,7 @@
                             'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
                         ];
 
-                        var locations = <?php echo json_encode($banksampah); ?>;
+                        var locations = <?php echo json_encode($dataPetugas); ?>;
 
                         locations.forEach(e => {
                             var randomIconUrl = iconUrls[Math.floor(Math.random() * iconUrls.length)];
@@ -165,6 +165,8 @@
                 </body>
                 <br>
 
+                <input type="text" name="petugas_lat" id="petugas_lat" value="{{ $dataPetugas->lat }}" hidden>
+                <input type="text" name="petugas_lon" id="petugas_lon" value="{{ $dataPetugas->lon }}" hidden>
 
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary" onclick="showAlert()">Next</button>

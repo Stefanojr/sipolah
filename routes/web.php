@@ -45,7 +45,7 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::get('/profile', 'PenggunaController@profile');
     Route::get('/logout', 'PenggunaController@logout');
     Route::post('/buang', 'BuangController@buangsam');
-    Route::post('/updateProfile', 'PenggunaController@updateProfile');
+    Route::post('/updateProfile', 'PenggunaController@updateProfile')->name('profile.update');
 
 });
 

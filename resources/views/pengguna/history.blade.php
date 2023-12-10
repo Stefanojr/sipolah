@@ -4,25 +4,25 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History Transaksi</title>
     <style>
-
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        overflow: auto;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: auto;
+        }
 
         .container {
             display: grid;
@@ -30,7 +30,8 @@
             height: 100%;
         }
 
-        .top, .bottom {
+        .top,
+        .bottom {
             padding: 20px;
         }
 
@@ -38,7 +39,8 @@
             padding: 20px;
         }
 
-        header, footer {
+        header,
+        footer {
             background-color: #333;
             color: white;
             padding: 10px;
@@ -62,14 +64,15 @@
             border-collapse: collapse;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
 
         th {
-            background-color:#333;
+            background-color: #333;
             color: white;
         }
 
@@ -78,6 +81,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="top">
@@ -92,11 +96,20 @@
                             <tr>
                                 <th>ID Transaksi</th>
                                 <th>Tanggal Transaksi</th>
-                                <th>Keterangan</th>
+                                <th>Petugas</th>
+                                <th>Petugas</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- Data transaksi akan ditampilkan disini -->
+                            @foreach ($datas as $data)
+                                <tr>
+                                    <td>{{ $data->id_buang }}</td>
+                                    <td>{{ $data->tanggal }}</td>
+                                    <td>{{ $data->petugas->name }}</td>
+                                    <td>{{ $data->petugas->nomorhp }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -144,6 +157,7 @@
 
     </script>
 </body>
+
 </html>
 
 
