@@ -151,8 +151,9 @@
                                     shadowSize: [41, 41]
                                 });
 
-                                L.marker([e.latitude,
-                                    e.longitude
+                                L.marker([
+                                    e.lat,
+                                    e.lon
                                 ], {
                                     icon: greenIcon
                                 }).addTo(map).bindPopup(e.name).openPopup();
