@@ -39,20 +39,14 @@
                 </li>
                 <li>
                     <a href="/ambilsampah">
-                        <i class="bi bi-recycle"></i>
+                        <i class="bi bi-truck"></i>
                         Ambil Sampah
                     </a>
                 </li>
                 <li>
-                    <a href="/notificationptg">
-                        <i class="bi bi-bell-fill"></i>
-                        Notification
-                    </a>
-                </li>
-                <li>
-                    <a href="/locationptg">
-                        <i class="bi bi-geo-alt-fill"></i>
-                        Location
+                    <a href="/daftarbuangptg">
+                        <i class="bi bi-card-checklist"></i>
+                        Daftar Buang
                     </a>
                 </li>
                 <li>

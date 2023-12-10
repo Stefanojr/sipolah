@@ -1,5 +1,5 @@
-@extends('pengguna.layouts.main')
-@section('title', 'AMBIL SAMPAH')
+@extends('petugas.layouts.main')
+@section('title','Notification')
 @section('content')
 
 
@@ -42,7 +42,7 @@
 <body>
 
     <div class="container">
-        <h1 class="my-4">Form Buang Sampah</h1>
+        <h1 class="my-4">Daftar Buang Sampah</h1>
         <form action="buang" method="post" action="/buang" id="buang">
             @csrf
             <div class="mb-3">
@@ -63,7 +63,7 @@
 
             <div class="mb-3">
                 <label for="nomorhp" class="form-label">Nama Petugas</label>
-                <input type="text" class="form-control" name="petugas" placeholder="{{ $dataPetugas->name }}" readonly>
+                <input type="text" class="form-control" name="petugas" readonly>
             </div>
 
             <div class="col-mb-3">
@@ -125,7 +125,7 @@
 
 
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-primary" onclick="showAlert()">Next</button>
+                    <button type="submit" class="btn btn-primary" onclick="showAlert()">Confirm</button>
                     <button type="reset" class="btn btn-secondary">Reset</button>
                 </div>
         </form>
@@ -136,5 +136,6 @@
 </body>
 
 </html>
+
 
 @endsection

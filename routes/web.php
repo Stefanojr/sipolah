@@ -54,8 +54,7 @@ Route::middleware('cekrole:petugas')->group(function () {
     Route::get('/petugas', 'PetugasController@indexptg');
     Route::get('/ambilsampah', 'PetugasController@ambilsampah');
     Route::get('/paymentptg', 'PetugasController@paymentptg');
-    Route::get('/notificationptg', 'PetugasController@notificationptg');
-    Route::get('/locationptg', 'PetugasController@locationptg');
+    Route::get('/daftarbuangptg', 'PetugasController@daftarbuangptg');
     Route::get('/historyptg', 'PetugasController@historyptg');
     Route::get('/profileptg', 'PetugasController@profileptg');
     Route::get('/logoutptg', 'PetugasController@logoutptg');

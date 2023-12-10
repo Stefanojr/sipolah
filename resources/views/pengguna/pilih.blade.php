@@ -106,6 +106,9 @@
             </div>
         </form>
         @endif
+        @csrf
+        <form action="buangsampah" method="get" action="/buangsampah" id="buangsampah">
+        <button type="submit" class="btn btn-primary" onclick="showAlert()">Next</button>
 
         <script>
             function showAlert() {

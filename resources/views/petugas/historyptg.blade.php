@@ -82,7 +82,7 @@
     <div class="container">
         <div class="top">
             <header>
-                <h1>History Transaksi</h1>
+                <h1>History Pengajuan</h1>
             </header>
 
             <main>
@@ -90,8 +90,8 @@
                     <table id="transaction-table">
                         <thead>
                             <tr>
-                                <th>ID Transaksi</th>
-                                <th>Tanggal Transaksi</th>
+                                <th>ID Pengajuan</th>
+                                <th>Tanggal Pengajuan</th>
                                 <th>Keterangan</th>
                             </tr>
                         </thead>

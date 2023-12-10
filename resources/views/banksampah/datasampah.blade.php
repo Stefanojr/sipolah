@@ -21,6 +21,10 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nama Pengguna</th>
+                    <th scope="col">Nama Petugas</th>
+                    <th scope="col">Tangal Pengambilan</th>
+                    <th scope="col">Kapasitas Organik</th>
+                    <th scope="col">Kapasitas Anorganik</th>
                     <th scope="col">Status</th>
                     <th scope="col">Aksi</th>
                 </tr>

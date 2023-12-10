@@ -25,14 +25,9 @@ class PetugasController extends Controller
     {
         return view('petugas/paymentptg');
     }
-    public function notificationptg()
+    public function daftarbuangptg()
     {
-        return view('petugas/notificationptg');
-    }
-
-    public function locationptg()
-    {
-        return view('petugas/locationptg');
+        return view('petugas/daftarbuangptg');
     }
 
     public function historyptg()

@@ -62,9 +62,8 @@
                 <label for="name" class="form-label">Nama Pengguna</label>
                 <input type="text" class="form-control" id="name" name="name" readonly value="{{Auth::user()->name}}">
             </div>
-
             <div class="mb-5">
-                <label for="nominal" class="form-label">Nominal Pembayaran</label>
+                <label for="nominal" class="form-label">Langganan Yang Dipilih</label>
                 @switch(Auth::user()->pilih->langganan)
                 @case(2)
                 <input type="text" class="form-control" name="nominal" value="Rp. 120,000" readonly>
@@ -84,7 +83,7 @@
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary" onclick="showAlert()">Bayar</button>
+                <button type="submit" class="btn btn-primary" onclick="showAlert()">Buat Pesanan</button>
                 <button type="reset" class="btn btn-secondary">Reset</button>
             </div>
         </form>

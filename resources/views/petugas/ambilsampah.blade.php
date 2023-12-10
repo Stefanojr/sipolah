@@ -20,6 +20,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nama Pengguna</th>
+                    <th scope="col">Detail</th>
                     <th scope="col">Status</th>
                     <th scope="col">Aksi</th>
                 </tr>
