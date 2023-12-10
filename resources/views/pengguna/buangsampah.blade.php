@@ -140,24 +140,24 @@
                         var locations = <?php echo json_encode($banksampah); ?>;
 
                         locations.forEach(e => {
-                                var randomIconUrl = iconUrls[Math.floor(Math.random() * iconUrls.length)];
+                            var randomIconUrl = iconUrls[Math.floor(Math.random() * iconUrls.length)];
 
-                                var greenIcon = new L.Icon({
-                                    iconUrl: randomIconUrl,
-                                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                                    iconSize: [25, 41],
-                                    iconAnchor: [12, 41],
-                                    popupAnchor: [1, -34],
-                                    shadowSize: [41, 41]
-                                });
-
-                                L.marker([
-                                    e.lat,
-                                    e.lon
-                                ], {
-                                    icon: greenIcon
-                                }).addTo(map).bindPopup(e.name).openPopup();
+                            var greenIcon = new L.Icon({
+                                iconUrl: randomIconUrl,
+                                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                                iconSize: [25, 41],
+                                iconAnchor: [12, 41],
+                                popupAnchor: [1, -34],
+                                shadowSize: [41, 41]
                             });
+
+                            L.marker([
+                                e.lat,
+                                e.lon
+                            ], {
+                                icon: greenIcon
+                            }).addTo(map).bindPopup(e.name).openPopup();
+                        });
                     </script>
 
                     <!-- Bootstrap JS -->
