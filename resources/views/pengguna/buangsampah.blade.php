@@ -155,7 +155,7 @@
                                     e.longitude
                                 ], {
                                     icon: greenIcon
-                                }).addTo(map).bindPopup(e.nama_lengkap).openPopup();
+                                }).addTo(map).bindPopup(e.name).openPopup();
                             });
                     </script>
 
