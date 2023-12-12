@@ -4,12 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\buangsampah;
+
 
 
 class PetugasController extends Controller
 {
     public function indexptg(){
+
     return view('petugas/indexptg');
+    }
+    public function tampung(){
+        $datas = buangsampah::where('user_id', Auth::user()->id)->get();
+
+        return view('pentugas/historyptg', [
+            'datas' => $datas,
+        ]);
     }
 
     public function postBuang(){

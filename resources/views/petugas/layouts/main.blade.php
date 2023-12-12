@@ -49,12 +49,7 @@
                         Daftar Buang
                     </a>
                 </li>
-                <li>
-                    <a href="/historyptg">
-                        <i class="bi bi-clock-history"></i>
-                        History
-                    </a>
-                </li>
+
                 <li>
                     <a href="/profileptg">
                         <i class="bi bi-person-lines-fill"></i>

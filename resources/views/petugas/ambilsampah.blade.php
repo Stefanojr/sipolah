@@ -18,15 +18,48 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nama Pengguna</th>
-                    <th scope="col">Detail</th>
+                    <th scope="col">ID Transaksi</th>
+                    <th scope="col">Tanggal </th>
+                    <th scope="col">Petugas</th>
+                    <th scope="col">Nomor Hp</th>
+                    <th scope="col">Jenis Langganan</th>
+                    <th scope="col">Berat Organik</th>
+                    <th scope="col">Berat An-organik</th>
                     <th scope="col">Status</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
             <tbody id="jobTable">
-                <!-- Isi tabel akan ditambahkan oleh JavaScript -->
+                    <!-- Data transaksi akan ditampilkan disini -->
+                    @foreach ($datas as $data)
+                        <tr>
+                            <td>{{ $data->id_buang }}</td>
+                            <td>{{ $data->tanggal }}</td>
+                            <td>{{ $data->petugas->name }}</td>
+                            <td>{{ $data->petugas->nomorhp }}</td>
+                            <td>
+                                @php
+                                    $type = Auth::user()->langganan->type;
+                                @endphp
+
+                                @if ($type == 1)
+                                    1 bulan / Rp. 65,000
+                                @elseif($type == 2)
+                                    2 bulan / Rp. 120,000
+                                @elseif($type == 3)
+                                    3 bulan / Rp. 180,000
+                                @elseif($type == 4)
+                                    4 bulan / Rp. 240,000
+                                @else
+                                    Belum ada langganan
+                                @endif
+                            </td>
+                            <td>{{ $data->kapasitas_organik }}</td>
+                            <td>{{ $data->kapasitas_anorganik }}</td>
+                            <td>{{ $data->status }}</td>
+                            <td>{{ Button }}</td>
+                        </tr>
+                    @endforeach
             </tbody>
         </table>
     </div>

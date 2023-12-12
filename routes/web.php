@@ -18,6 +18,9 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\BanksampahController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\chartController;
+
+
 
 
 Route::get('/', 'pageController@index');
@@ -46,6 +49,8 @@ Route::middleware('cekrole:pengguna')->group(function () {
     Route::get('/logout', 'PenggunaController@logout');
     Route::post('/buang', 'BuangController@buangsam');
     Route::post('/updateProfile', 'PenggunaController@updateProfile')->name('profile.update');
+
+    Route::get('/pie-chart', [chartController::class, 'pieChart']);
 
 });
 

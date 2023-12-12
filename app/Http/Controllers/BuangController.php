@@ -12,19 +12,12 @@ class BuangController extends Controller
 {
     public function buangsam(request $request)
     {
-        // buangsampah::create([
-        //     'name'    => $request->input('name'),
-        //     'nomorhp' => $request->input('nomorhp'),
-        //     'email'   => $request->input('email'),
-        //     'jenis'   => $request->input('jenis'),
-        //     'berat'   => $request->input('berat'),
-        //     'tanggal' => $request->input('tanggal'),
-        //     'alamat'  => $request->input('alamat'),
-        // ]);
 
+        $status = $request->input('status', 'Belum Terbayar');
         $validator = Validator::make($request->all(), [
             'petugas_lat' => 'required',
             'petugas_lon' => 'required',
+
         ]);
 
         $data = buangsampah::create([
@@ -38,9 +31,10 @@ class BuangController extends Controller
             'tanggal'               => $request->tanggal,
             'latitude_pengambilan'  => $request->petugas_lat,
             'longitude_pengambilan' => $request->petugas_lon,
+            'status'                => $request->status,
         ]);
 
-        return redirect('/payment')
-            ->with('flash_berhasil', 'Input Berhasil');
+        return redirect('/history')
+            ->with('flash_ss', 'Data Berhasil diinput');
     }
 }

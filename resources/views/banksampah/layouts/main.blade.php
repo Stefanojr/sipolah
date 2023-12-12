@@ -24,7 +24,7 @@
 
     <nav class="navbar navbar-light bg-light justify-content-between">
         <a class="navbar-brand" href="/pengguna"><strong>SIPOLAH</strong></a>
-            <a class="btn btn-dark" Style="background-color: #7386D5" href="/logout" role="button"><i class="bi bi-door-closed-fill"></i> Logout</a>
+            <a class="btn btn-dark" Style="background-color: #7386D5" href="/logoutbs" role="button"><i class="bi bi-door-closed-fill"></i> Logout</a>
         </div>
 
     </nav>

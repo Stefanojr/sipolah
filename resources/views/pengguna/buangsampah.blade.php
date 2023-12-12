@@ -92,9 +92,9 @@
                 <label for="tanggal" class="form-label">Tanggal Pickup</label>
                 <input type="date" class="form-control" id="tanggal" name="tanggal">
             </div>
-
+{{--
             <div class="mb-3">
-                <label for="maps" class="form-label">Pilih Lokasi Bank Sampah</label>
+                <label for="maps" class="form-label">Pilih Lokasi Bank Sampah</label> --}}
 
                 <title>Maps</title>
                 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -127,7 +127,7 @@
 
                             map.setView([lat, lon], 18);
                             var userLocation = L.marker([lat, lon]).addTo(map);
-                            userLocation.bindPopup('You are here!').openPopup();
+                            userLocation.bindPopup('Kamu Disini!').openPopup();
                         });
 
                         var iconUrls = [
@@ -167,6 +167,7 @@
 
                 <input type="text" name="petugas_lat" id="petugas_lat" value="{{ $dataPetugas->lat }}" hidden>
                 <input type="text" name="petugas_lon" id="petugas_lon" value="{{ $dataPetugas->lon }}" hidden>
+                <input type="text" name="status" id="status" value="{{ $dataPetugas->lat }}" hidden>
 
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary" onclick="showAlert()">Next</button>

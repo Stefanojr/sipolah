@@ -47,7 +47,7 @@
                             <label class="labels">Email</label>
                             <input type="email" name="email" class="form-control"
                                 placeholder="Masukkan Email" value="{{Auth::user()->email}}"></div>
-                        <div class="col-md-12"><label class="labels">Password</label><input type="password"
+                        <div class="col-md-12"><label class="labels">Password</label><input type="password" name="password"
                                 class="form-control" placeholder="Masukkan Password" value="{{Auth::user()->password}}">
                         </div>
                     </div>

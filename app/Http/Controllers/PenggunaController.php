@@ -86,38 +86,23 @@ class PenggunaController extends Controller
             'name'     => 'required',
             'username' => 'required',
             'email' => 'required',
+            'password' => 'required',
+
         ]);
 
-        // dd($request->all()); // Debugging line
-        // dd($request->validated()); // Add this line for debugging
-        // Ambil user berdasarkan ID
-        $user = User::find(auth()->user()->id);
 
-        // Validasi data yang diinputkan user
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'username' => 'required|string|max:255|unique:users,username,' . $user->id,
-        //     'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-        //     'nomorhp' => 'required|string|max:255',
-        //     'password' => 'required|string|min:8|confirmed',
-        // ]);
+        $user = User::find(auth()->user()->id);
 
         $user->name = $request->name;
         $user->username = $request->username;
         $user->email = $request->email;
+        $user->password = $request->password;
+
         $user->save();
 
-        // $user->update([
-        //     'name'     => $request->input('name'),
-        //     'username' => $request->input('username'),
-        //     'email'    => $request->input('email'),
-        //     'nomorhp'  => $request->input('nomorhp'),
-        //     'password' => bcrypt($request->input('password')),
-        // ]);
 
-        // return redirect('/profile')->with('profil_berhasil', 'Profile Berhasil Diubah');
         return back()->with([
-            'success' => 'berhasil',
+            'success' => 'Profil Berhasil Di Update',
         ]);
     }
 
@@ -140,6 +125,7 @@ class PenggunaController extends Controller
      */
     public function postPilih(Request $request)
     {
+        $status = $request->input('status', 'Belum Terbayar');
         $validator = Validator::make($request->all(), [
             'petugas'   => 'required',
             'langganan' => 'required',
@@ -149,6 +135,8 @@ class PenggunaController extends Controller
             'user_id'    => Auth::user()->id,
             'petugas_id' => $request->petugas,
             'type'       => $request->type,
+            'status'     => $request->status,
+
         ]);
 
         return redirect()->route('pengguna.pilih')->with([

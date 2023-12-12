@@ -34,7 +34,7 @@ class BanksampahController extends Controller
             return view('banksampah/historybs');
         }
         public function profilebs()
-        {
+        { 
             return view('banksampah/profilebs');
         }
         public function logoutbs(Request $request)

@@ -58,12 +58,7 @@
                     </a>
                 </li>
                 @endif
-                <li>
-                    <a href="/payment">
-                        <i class="bi bi-credit-card" id="payment"></i>
-                        <strong>Payment</strong>
-                    </a>
-                </li>
+
                 <li>
                     <a href="/history">
                         <i class="bi bi-clock-history"></i>

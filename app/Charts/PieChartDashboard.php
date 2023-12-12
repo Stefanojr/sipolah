@@ -15,7 +15,7 @@ class PieChartDashboard extends Chart
     {
         parent::__construct();
 
-        $this->labels(['GK', 'SLM', 'YOG', 'BTL']);
-        $this->dataset('My dataset', 'pie', [1, 2, 3, 4]);
+        $this->labels(['Organik', 'An-organik']);
+        $this->dataset('My dataset', 'pie', [1, 2]);
     }
 }
