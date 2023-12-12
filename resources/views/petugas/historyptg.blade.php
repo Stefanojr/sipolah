@@ -1,150 +1,72 @@
 @extends('petugas.layouts.main')
-@section('title','History')
-@section('content')
 
+@section('title','Ambil Sampah')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>History Transaksi</title>
-    <style>
+    <title>Daftar Pekerjaan</title>
+    <br>
 
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        overflow: auto;
-    }
-
-        .container {
-            display: grid;
-            grid-template-rows: 1fr 300px 1fr;
-            height: 100%;
-        }
-
-        .top, .bottom {
-            padding: 20px;
-        }
-
-        .middle {
-            padding: 20px;
-        }
-
-        header, footer {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            text-align: center;
-        }
-
-        main {
-            padding: 20px;
-        }
-
-        .card {
-            background-color: #f8f8f8;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color:#333;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
+
 <body>
     <div class="container">
-        <div class="top">
-            <header>
-                <h1>History Pengajuan</h1>
-            </header>
 
-            <main>
-                <div class="card">
-                    <table id="transaction-table">
-                        <thead>
-                            <tr>
-                                <th>ID Pengajuan</th>
-                                <th>Tanggal Pengajuan</th>
-                                <th>Keterangan</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Data transaksi akan ditampilkan disini -->
-                        </tbody>
-                    </table>
-                </div>
-            </main>
+        @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session('success') }}</strong> Silahkan Lanjut Login
         </div>
+        @endif
 
-        <div class="middle">
-            <!-- Isi bagian tengah Anda di sini -->
-        </div>
+        <h1 class="text-center">Daftar Permintaan</h1>
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID Transaksi</th>
+                    <th scope="col">Tanggal </th>
+                    <th scope="col">Petugas</th>
+                    <th scope="col">Nomor Hp</th>
+                    <th scope="col">Berat Organik</th>
+                    <th scope="col">Berat An-organik</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody id="jobTable">
+                @foreach ($datas as $data)
+                <tr>
+                    <td>{{ $data->id_buang }}</td>
+                    <td>{{ $data->tanggal }}</td>
+                    <td>{{ $data->petugas->name }}</td>
+                    <td>{{ $data->nomorhp }}</td>
+                    <td>{{ $data->kapasitas_organik }}</td>
+                    <td>{{ $data->kapasitas_anorganik }}</td>
+                    @switch($data->status)
 
-        <div class="bottom">
-            <footer>
-                SIPOLAH
-            </footer>
-        </div>
+                    @case(1)
+                    <td><span class="badge text-bg-danger">Waiting</span></td>
+                    @break
+
+                    @case(2)
+                    <td><span class="badge text-bg-danger">Sudah</span></td>
+                    @break
+
+                    @default
+                    <td><span class="badge text-bg-danger">Belum</span></td>
+                    @endswitch
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
-
-    <script>
-        function fetchTransactions() {
-            // Tambahkan alamat server yang valid untuk mengambil data transaksi
-            var serverURL = 'http://example.com/transactions';
-
-            fetch(serverURL)
-                .then(response => response.json())
-                .then(data => {
-                    var table = document.getElementById('transaction-table');
-                    data.forEach(transaction => {
-                        var row = table.insertRow();
-                        var id = row.insertCell();
-                        var date = row.insertCell();
-                        var total = row.insertCell();
-
-                        id.textContent = transaction.id;
-                        date.textContent = transaction.date;
-                        total.textContent = transaction.total;
-                    });
-                })
-                .catch(error => {
-                    console.error('Error fetching transactions:', error);
-                });
-        }
-
-        fetchTransactions();
-
-
-    </script>
+    <script src="app.js"></script>
 </body>
-</html>
 
+</html>
 
 @endsection

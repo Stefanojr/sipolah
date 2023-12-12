@@ -22,7 +22,7 @@ class PenggunaController extends Controller
 
     public function buang()
     {
-        if (empty(Auth::user()->langganan)) {
+        if (Auth::user()->LanggananExpire->isPast()) {
             return redirect()->route('pengguna.pilih');
         }
 
@@ -75,6 +75,7 @@ class PenggunaController extends Controller
 
         // Update data role di database
         Auth::user()->update(['role' => $request->input('role')]);
+        Auth::logout();
 
         // Redirect ke halaman login dengan pesan flash
         return redirect()->route('login')->with('success', 'Role berhasil diperbarui.');
@@ -111,12 +112,10 @@ class PenggunaController extends Controller
      */
     public function pilih()
     {
-
         $dataPetugas = User::where('role', 'petugas')->get();
 
         return view('pengguna.pilih', [
             'dataPetugas'   => $dataPetugas,
-            // 'dataLangganan' => $dataLangganan,
         ]);
     }
 
@@ -125,19 +124,14 @@ class PenggunaController extends Controller
      */
     public function postPilih(Request $request)
     {
-        $status = $request->input('status', 'Belum Terbayar');
         $validator = Validator::make($request->all(), [
             'petugas'   => 'required',
             'langganan' => 'required',
         ]);
 
-        $data = UserLangganan::create([
-            'user_id'    => Auth::user()->id,
-            'petugas_id' => $request->petugas,
-            'type'       => $request->type,
-            'status'     => $request->status,
-
-        ]);
+        $user = User::where('id', Auth::user()->id)->first();
+        $user->LanggananExpire = \Carbon\Carbon::now()->addDays((int) $request->langganan);
+        $user->save();
 
         return redirect()->route('pengguna.pilih')->with([
             'status' => 'Berhasil menambahkan',

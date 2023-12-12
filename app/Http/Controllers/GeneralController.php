@@ -52,4 +52,37 @@ class GeneralController extends Controller
                 return redirect('/login');
         };
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function home(Request $request)
+    {
+        switch (Auth::user()->role) {
+            case "petugas":
+                // return redirect('/petugas/');
+                return redirect()->intended('petugas');
+                break;
+            case "banksampah":
+                return redirect('/banksampah/');
+                break;
+            case "pengguna":
+                return redirect('/pengguna/');
+                break;
+            default:
+                return redirect('/login');
+        };
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        return redirect()->route('login');
+    }
 }

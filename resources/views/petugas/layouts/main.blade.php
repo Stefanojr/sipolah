@@ -31,6 +31,7 @@
             </div>
 
             <ul class="list-unstyled components">
+                @if (Auth::user()->verived)
                 <li>
                     <a href="/petugas">
                         <i class="bi bi-house"></i>
@@ -44,16 +45,23 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/daftarbuangptg">
-                        <i class="bi bi-card-checklist"></i>
-                        Daftar Buang
-                    </a>
-                </li>
-
-                <li>
                     <a href="/profileptg">
                         <i class="bi bi-person-lines-fill"></i>
                         Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="/historyptg">
+                        <i class="bi bi-person-lines-fill"></i>
+                        History
+                    </a>
+                </li>
+                @endif
+
+                <li>
+                    <a href="/daftarbuangptg">
+                        <i class="bi bi-card-checklist"></i>
+                        Daftar Buang
                     </a>
                 </li>
             </ul>

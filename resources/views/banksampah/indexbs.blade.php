@@ -61,19 +61,16 @@
                         <th>ID</th>
                         <th>Nama Bank Sampah (kg)</th>
                         <th>Kapasitas</th>
-
-                        <!-- Tambahkan kolom lain sesuai kebutuhan -->
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($datas as $data)
                     <tr>
-                        <td>1</td>
-                        <td>TPS Piyungan</td>
+                        <td>{{ $data->id }}</td>
+                        <td>{{ $data->name }}</td>
                         <td>200</td>
-
-                        <!-- Tambahkan data petugas lainnya -->
                     </tr>
-                    <!-- Tambahkan baris lain sesuai jumlah data petugas -->
+                    @endforeach
                 </tbody>
             </table>
         </div>

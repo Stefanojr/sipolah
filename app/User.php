@@ -26,7 +26,10 @@ class User extends Authenticatable
         'role',
         'password',
         'lat',
-        'lon'
+        'lon',
+        'LanggananType',
+        'LanggananExpire',
+        'verived',
     ];
 
     /**
@@ -44,6 +47,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
+        'LanggananExpire'   => 'datetime',
         'email_verified_at' => 'datetime',
     ];
 

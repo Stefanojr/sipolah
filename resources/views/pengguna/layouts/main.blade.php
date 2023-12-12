@@ -24,8 +24,8 @@
 <body>
     <nav class="navbar navbar-light bg-light justify-content-between">
         <a class="navbar-brand" href="/pengguna"><strong>SIPOLAH</strong></a>
-        <a class="btn btn-dark" Style="background-color: #7386D5" href="/logout" role="button"><i
-                class="bi bi-door-closed-fill"></i> Logout</a>
+        <a class="btn btn-dark" Style="background-color: #7386D5" href="{{ route('logout') }}" role="button">
+            <i class="bi bi-door-closed-fill"></i> Logout</a>
         </div>
 
     </nav>
@@ -50,7 +50,7 @@
                         <strong>Pilih Petugas</strong>
                     </a>
                 </li>
-                @if (!empty(Auth::user()->langganan))
+                @if (!Auth::user()->LanggananExpire->isPast())
                 <li>
                     <a href="/buangsampah">
                         <i class="bi bi-recycle"></i>

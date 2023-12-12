@@ -59,53 +59,39 @@
         </div>
         @endif
 
-        @if (!empty(Auth::user()->langganan))
-
-        <div class="mb-3">
-            <label for="name" class="form-label">Status Langganan</label>
-            @switch(Auth::user()->langganan->type)
-            @case(2)
-            <input type="text" class="form-control" name="nominal" value="Rp. 120,000" readonly>
-            @break
-
-            @case(3)
-            <input type="text" class="form-control" name="nominal" value="Rp. 180,000" readonly>
-            @break
-
-            @case(4)
-            <input type="text" class="form-control" name="nominal" value="Rp. 240,000" readonly>
-            @break
-
-            @default
-            <input type="text" class="form-control" name="nominal" value="Rp. 65,000" readonly>
-            @endswitch
-        </div>
-        @else
+        @if (Auth::user()->LanggananExpire->isPast())
         <form method="POST" action="{{ route('pengguna.add') }}">
             @csrf
+
             <div class="mb-3">
-                <label for="name" class="form-label">Nama Petugas</label>
-                <select name="petugas">
+                <label for="petugas">Pilih Petugas</label>
+                <select class="form-control" name="petugas" id="petugas">
                     @foreach ($dataPetugas as $petugas)
                     <option value="{{ $petugas->id }}">{{ $petugas->name }}</option>
                     @endforeach
                 </select>
             </div>
-            <br>
 
-            <label for="type">Pilih Langganan :</label>
-            <select id="type" name="type">
-                <option value="1">1 bulan / Rp. 65,000</option>
-                <option value="2">2 bulan / Rp. 120,000</option>
-                <option value="3">3 bulan / Rp. 180,000</option>
-                <option value="4">4 bulan / Rp. 240,000</option>
-            </select>
-            <br><br>
+            <div class="mb-3">
+                <label for="langganan">Pilih Langganan</label>
+                <select class="form-control" name="langganan" id="langganan">
+                    <option value="30">1 bulan / Rp. 65,000</option>
+                    <option value="60">2 bulan / Rp. 120,000</option>
+                    <option value="90">3 bulan / Rp. 180,000</option>
+                    <option value="120">4 bulan / Rp. 240,000</option>
+                </select>
+            </div>
+
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary" onclick="showAlert()">Bayar</button>
                 <button type="reset" class="btn btn-secondary">Reset</button>
             </div>
         </form>
+        @else
+        <div class="mb-3">
+            <label for="name" class="form-label">Langganan Expire</label>
+            <input type="datetime" class="form-control" name="nominal" value="{{ Auth::user()->LanggananExpire }}" readonly>
+        </div>
         @endif
 
         <script>
@@ -114,6 +100,7 @@
         }
         </script>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"></script>
 </body>

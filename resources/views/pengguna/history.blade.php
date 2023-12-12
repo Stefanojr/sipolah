@@ -116,7 +116,6 @@
                                 <th>Tanggal Transaksi</th>
                                 <th>Petugas</th>
                                 <th>Nomor Hp</th>
-                                <th>Jenis Langganan</th>
                                 <th>Berat Organik</th>
                                 <th>Berat An-Organik</th>
                                 <th>Status</th>
@@ -130,27 +129,22 @@
                                     <td>{{ $data->tanggal }}</td>
                                     <td>{{ $data->petugas->name }}</td>
                                     <td>{{ $data->petugas->nomorhp }}</td>
-                                    <td>
-                                        @php
-                                            $type = Auth::user()->langganan->type;
-                                        @endphp
-
-                                        @if ($type == 1)
-                                            1 bulan / Rp. 65,000
-                                        @elseif($type == 2)
-                                            2 bulan / Rp. 120,000
-                                        @elseif($type == 3)
-                                            3 bulan / Rp. 180,000
-                                        @elseif($type == 4)
-                                            4 bulan / Rp. 240,000
-                                        @else
-                                            Belum ada langganan
-                                        @endif
-                                    </td>
                                     <td>{{ $data->kapasitas_organik }}</td>
                                     <td>{{ $data->kapasitas_anorganik }}</td>
-                                    <td>{{ $data->status }}</td>
+                                    @switch($data->status)
 
+                                    @case(1)
+                                    <td><span class="badge text-bg-danger">Waiting</span></td>
+                                    @break
+
+                                    @case(2)
+                                    <td><span class="badge text-bg-danger">Sudah</span></td>
+                                    @break
+
+                                    @default
+                                    <td><span class="badge text-bg-danger">Belum</span></td>
+
+                                    @endswitch
                                 </tr>
                             @endforeach
                         </tbody>

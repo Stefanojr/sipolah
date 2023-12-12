@@ -51,6 +51,21 @@ class buangsampah extends Authenticatable
     ];
 
     /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id_buang';
+
+    /**
+     * Get the phone associated with the user.
+     */
+    public function pengguna()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    /**
      * Get the phone associated with the user.
      */
     public function petugas()

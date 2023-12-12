@@ -43,12 +43,22 @@
 
     <div class="container">
         <h1 class="my-4">Daftar Buang Sampah</h1>
-        <form action="buang" method="post" action="/buang" id="buang">
+        @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session('success') }}</strong>
+        </div>
+        @endif
+
+        <form method="POST" action="{{ route('petugas.verived') }}" id="buang">
             @csrf
+
+            <input type="text" name="petugas_id" id="petugas_id" value="{{ Auth::user()->id }}" hidden>
+
             <div class="mb-3">
-                <label for="name" class="form-label">Nama Pengguna</label>
+                <label for="name" class="form-label">Nama</label>
                 <input type="text" class="form-control" id="name" readonly name="name" value="{{ Auth::user()->name }}">
             </div>
+
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" readonly name="email"
@@ -62,72 +72,9 @@
             </div>
 
             <div class="mb-3">
-                <label for="nomorhp" class="form-label">Nama Petugas</label>
-                <input type="text" class="form-control" name="petugas" readonly>
+                <button type="submit" class="btn btn-primary" onclick="showAlert()">Confirm</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
             </div>
-
-            <div class="col-mb-3">
-                <label>Kapasitas Sampah Organik (kg)</label>
-            </div>
-            <div class="col-mb-3 form-group">
-                <input type="number" class="form-control @error('kapasitas_organik') {{ 'is-invalid' }} @enderror"
-                    name="kapasitas_organik" value="{{ old('kapasitas_organik') }}">
-                @error('kapasitas_organik')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <div class="col-mb-3">
-                <label>Kapasitas Sampah Anorganik (kg)</label>
-            </div>
-            <div class="col-mb-3 form-group">
-                <input type="number" class="form-control @error('kapasitas_anorganik') {{ 'is-invalid' }} @enderror"
-                    name="kapasitas_anorganik" value="{{ old('kapasitas_anorganik') }}">
-                @error('kapasitas_anorganik')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <div class="mb-3">
-                <label for="tanggal" class="form-label">Tanggal Pickup</label>
-                <input type="date" class="form-control" id="tanggal" name="tanggal">
-            </div>
-
-            <div class="mb-3">
-                <label for="maps" class="form-label">Pilih Lokasi Bank Sampah</label>
-
-                <!-- Bootstrap CSS -->
-                <link rel="stylesheet" href="{{ asset('css/maps.css') }}">
-
-                <title>Maps</title>
-                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-                <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-                <style>
-                    #map-canvas {
-                        width: 100%;
-                        height: 400px;
-                    }
-                </style>
-                </head>
-
-                <body>
-                    <div id="map-canvas"></div>
-                    <script>
-                        var map = L.map('map-canvas').setView([-7.785943619482843, 110.37836300972296], 8);
-                                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                    attribution: '&copy; <a href="https://www.google.com/maps/@-7.7860654,110.377561,18.55z?entry=ttu">OpenStreetMap</a> contributors'
-                                }).addTo(map);
-                    </script>
-                    <!-- Bootstrap JS -->
-                    <script src="{{ asset('js/buang.js') }}"></script>
-                </body>
-                <br>
-
-
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary" onclick="showAlert()">Confirm</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
         </form>
 
     </div>
