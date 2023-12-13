@@ -95,6 +95,7 @@
                                 <th>Petugas</th>
                                 <th>Sampah Organik</th>
                                 <th>Sampah An-Organik</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -105,6 +106,20 @@
                                     <td>{{ $data->petugas->name }}</td>
                                     <td>{{ $data->kapasitas_organik }}</td>
                                     <td>{{ $data->kapasitas_anorganik }}</td>
+                                    @switch($data->status)
+
+                                    @case(1)
+                                    <td><span class="badge text-bg-danger">Waiting</span></td>
+                                    @break
+
+                                    @case(2)
+                                    <td><span class="badge text-bg-danger">Sudah</span></td>
+                                    @break
+
+                                    @default
+                                    <td><span class="badge text-bg-danger">Belum</span></td>
+
+                                    @endswitch
                                 </tr>
                             @endforeach
                         </tbody>
