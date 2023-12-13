@@ -15,6 +15,11 @@ class PenggunaController extends Controller
 {
     public function index()
     {
+        // $user = User::find(Auth::user()->id);
+
+        // dd(Auth::user()->langganan);
+        // dd($user->langganan);
+
         $chart = new PieChartDashboard();
         return view('pengguna/dashboard', ['chart' => $chart]);
     }
@@ -22,11 +27,11 @@ class PenggunaController extends Controller
 
     public function buang()
     {
-        if (Auth::user()->LanggananExpire->isPast()) {
+        if (Auth::user()->LanggananExpired->isPast()) {
             return redirect()->route('pengguna.pilih');
         }
 
-        $dataPetugas = User::find(Auth::user()->langganan->petugas_id)->first();
+        $dataPetugas = User::find(Auth::user()->LanggananPetugas);
 
         return view('pengguna/buangsampah', [
             'dataPetugas' => $dataPetugas,
@@ -130,8 +135,15 @@ class PenggunaController extends Controller
         ]);
 
         $user = User::where('id', Auth::user()->id)->first();
-        $user->LanggananExpire = \Carbon\Carbon::now()->addDays((int) $request->langganan);
+        $user->LanggananPetugas = $request->petugas;
+        $user->LanggananExpired = \Carbon\Carbon::now()->addDays((int) $request->langganan);
         $user->save();
+
+        // $petugas = UserLangganan::create([
+        //     'user_id'    => Auth::user()->id,
+        //     'petugas_id' => $request->petugas,
+        //     'expired_at' => \Carbon\Carbon::now()->addDays((int) $request->langganan),
+        // ]);
 
         return redirect()->route('pengguna.pilih')->with([
             'status' => 'Berhasil menambahkan',

@@ -50,7 +50,8 @@
                         <strong>Pilih Petugas</strong>
                     </a>
                 </li>
-                @if (!Auth::user()->LanggananExpire->isPast())
+
+                @if (!Auth::user()->LanggananExpired->isPast())
                 <li>
                     <a href="/buangsampah">
                         <i class="bi bi-recycle"></i>

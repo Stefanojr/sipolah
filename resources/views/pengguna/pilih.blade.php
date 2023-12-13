@@ -59,7 +59,7 @@
         </div>
         @endif
 
-        @if (Auth::user()->LanggananExpire->isPast())
+        @if (Auth::user()->LanggananExpired->isPast())
         <form method="POST" action="{{ route('pengguna.add') }}">
             @csrf
 
@@ -90,7 +90,7 @@
         @else
         <div class="mb-3">
             <label for="name" class="form-label">Langganan Expire</label>
-            <input type="datetime" class="form-control" name="nominal" value="{{ Auth::user()->LanggananExpire }}" readonly>
+            <input type="datetime" class="form-control" name="nominal" value="{{ Auth::user()->LanggananExpired }}" readonly>
         </div>
         @endif
 

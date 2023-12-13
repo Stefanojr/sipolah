@@ -27,9 +27,9 @@ class User extends Authenticatable
         'password',
         'lat',
         'lon',
-        'LanggananType',
-        'LanggananExpire',
         'verived',
+        'LanggananPetugas',
+        'LanggananExpired',
     ];
 
     /**
@@ -47,8 +47,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'LanggananExpire'   => 'datetime',
         'email_verified_at' => 'datetime',
+        'LanggananExpired'  => 'datetime',
     ];
 
     /**

@@ -22,7 +22,7 @@ class BuangController extends Controller
 
         $data = buangsampah::create([
             'user_id'               => Auth::user()->id,
-            'petugas_id'            => Auth::user()->langganan->petugas_id,
+            'petugas_id'            => Auth::user()->LanggananPetugas,
             'nomorhp'               => $request->nomorhp,
             'name'                  => $request->name,
             'email'                 => $request->email,
