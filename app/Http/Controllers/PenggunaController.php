@@ -49,11 +49,6 @@ class PenggunaController extends Controller
         return view('pengguna/payment');
     }
 
-    public function location()
-    {
-        return view('pengguna/location');
-    }
-
     public function history()
     {
         $datas = buangsampah::where('user_id', Auth::user()->id)->get();
