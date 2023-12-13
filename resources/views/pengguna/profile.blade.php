@@ -72,10 +72,6 @@
                     <i class="bi bi-caret-right"></i> Petugas
                 </a>
 
-                <a href="javascript:void(0);" onclick="changeRole('banksampah')" class="btn btn-secondary btn-lg mb-3">
-                    <i class="bi bi-caret-right"></i> Bank Sampah
-                </a>
-
             </div>
         </div>
     </div>

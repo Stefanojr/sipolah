@@ -11,6 +11,7 @@ use App\PetugasAmbil;
 use App\PetugasVerived;
 use App\User;
 use App\UserLangganan;
+use Illuminate\Support\Facades\Validator;
 
 class PetugasController extends Controller
 {
@@ -131,5 +132,32 @@ class PetugasController extends Controller
             'dataTPS' => $dataTPS,
         ]);
     }
+
+    public function updateProfilePtg(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'     => 'required',
+            'username' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+
+        ]);
+
+
+        $user = User::find(auth()->user()->id);
+
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = $request->password;
+
+        $user->save();
+
+
+        return back()->with([
+            'success' => 'Profil Berhasil Di Update',
+        ]);
+    }
+
 
 }

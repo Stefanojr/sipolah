@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/logoutptg', 'PetugasController@logoutptg');
         Route::post('ambil-sampah', 'PetugasController@ambil_sampah')->name('petugas.ambil');
         Route::post('verived', 'PetugasController@verived')->name('petugas.verived');
+        Route::post('/updateProfilePtg', 'PetugasController@updateProfilePtg')->name('profile.updatePtg');
     });
 
     Route::middleware('cekrole:banksampah')->group(function () {
@@ -83,6 +84,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/historybs', 'BanksampahController@historybs');
         Route::get('/profilebs', 'BanksampahController@profilebs');
         Route::get('/logoutbs', 'BankSampahController@logoutbs');
+        Route::post('/updateProfileBs', 'BankSampahController@updateProfileBs')->name('profile.updateBs');
 
         Route::post('boleh', 'BankSampahController@boleh')->name('bank.boleh');
     });

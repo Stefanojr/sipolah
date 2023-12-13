@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Charts\PieChartDashboard;
 use App\Location;
+use Illuminate\Support\Facades\Validator;
+use App\User;
 
 class BanksampahController extends Controller
 {
@@ -85,6 +87,32 @@ class BanksampahController extends Controller
         $data->save();
 
         return redirect()->route('bank.data')->with('success', "Berhasil");
+    }
+
+    public function updateProfileBs(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'     => 'required',
+            'username' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+
+        ]);
+
+
+        $user = User::find(auth()->user()->id);
+
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = $request->password;
+
+        $user->save();
+
+
+        return back()->with([
+            'success' => 'Profil Berhasil Di Update',
+        ]);
     }
 
 }
