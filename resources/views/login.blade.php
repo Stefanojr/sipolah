@@ -39,6 +39,17 @@
                 margin-top: -58.59px;
             }
         }
+        .form-inline {
+      text-align: center;
+      text-size-adjust: inherit
+    }
+
+    .form-label {
+      display: inline-block;
+    }
+
+
+
 
         .navbar .nav-link {
             color: #fff !important;
@@ -71,38 +82,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/register" rel="nofollow" target="_blank">Account</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://mdbootstrap.com/docs/standard/"
-                                target="_blank">Contact</a>
-                        </li>
+
                     </ul>
 
-                    <ul class="navbar-nav d-flex flex-row">
-                        <!-- Icons -->
-                        <li class="nav-item me-3 me-lg-0">
-                            <a class="nav-link" href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA"
-                                rel="nofollow" target="_blank">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item me-3 me-lg-0">
-                            <a class="nav-link" href="https://www.facebook.com/mdbootstrap" rel="nofollow"
-                                target="_blank">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item me-3 me-lg-0">
-                            <a class="nav-link" href="https://twitter.com/MDBootstrap" rel="nofollow" target="_blank">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item me-3 me-lg-0">
-                            <a class="nav-link" href="https://github.com/mdbootstrap/mdb-ui-kit" rel="nofollow"
-                                target="_blank">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </li>
-                    </ul>
+
                 </div>
             </div>
         </nav>
@@ -142,7 +125,11 @@
 
                             <form class="bg-white rounded shadow-5-strong p-5" action="{{ route('postlogin') }}"
                                 method="POST">
+
                                 @csrf
+                                <div class="form-inline mb-4">
+                                    <label class="form-label" for="formLabel2" ><strong><i class="fas fa-sign-in-alt"></i>  Form Login</strong> </label>
+                                </div>
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="form1Example1">Email address</label>
