@@ -10,6 +10,7 @@
     <title>Data Petugas</title>
     <!-- Tambahkan stylesheet CSS sesuai kebutuhan Anda -->
     <link rel="stylesheet" href="{{ asset('css/maps.css') }}">
+
     <style>
         .container {
             display: flex;
@@ -60,15 +61,20 @@
                     <tr>
                         <th>ID</th>
                         <th>Nama</th>
-                        <th>Jabatan</th>
+                        <th>Nomor Telepon</th>
                         <!-- Tambahkan kolom lain sesuai kebutuhan -->
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td>Admin</td>
+                        @foreach ($datasptg as $data)
+                        <tr>
+                            <td>{{ $data->id }}</td>
+                            <td>{{ $data->name }}</td>
+                            <td>{{ $data->nomorhp }}</td>
+
+                        </tr>
+                        @endforeach
                         <!-- Tambahkan data petugas lainnya -->
                     </tr>
                     <!-- Tambahkan baris lain sesuai jumlah data petugas -->
@@ -83,11 +89,12 @@
 
             <!DOCTYPE html>
             <html>
+
             <head>
                 <!-- Bootstrap CSS -->
                 <link rel="stylesheet" href="{{ asset('css/maps.css') }}">
 
-                <title>Maps</title>
+                <title>Lokasi Bank Sampah</title>
                 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
                 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
                 <style>
@@ -97,6 +104,10 @@
                     }
                 </style>
             </head>
+            <table>
+
+            </table>
+
             <body>
                 <div id="map-canvas"></div>
                 <script>
@@ -104,8 +115,45 @@
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; <a href="https://www.google.com/maps/@-7.7860654,110.377561,18.55z?entry=ttu">OpenStreetMap</a> contributors'
                     }).addTo(map);
+
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var lat = position.coords.latitude;
+                        var lon = position.coords.longitude;
+
+                        map.setView([lat, lon], 18);
+                        var userLocation = L.marker([lat, lon]).addTo(map);
+                        userLocation.bindPopup('Kamu Disini!').openPopup();
+                    });
+
+                    var iconUrls = [
+                        'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                        'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                        'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+                        'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+                    ];
+
+                    var locations = <?php echo json_encode($dataspg); ?>;
+
+                    locations.forEach(e => {
+                        var randomIconUrl = iconUrls[Math.floor(Math.random() * iconUrls.length)];
+
+                        var greenIcon = new L.Icon({
+                            iconUrl: randomIconUrl,
+                            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 41],
+                            popupAnchor: [1, -34],
+                            shadowSize: [41, 41]
+                        });
+
+                        L.marker([
+                            e.lat,
+                            e.lon
+                        ], {
+                            icon: greenIcon
+                        }).addTo(map).bindPopup(e.name).openPopup();
+                    });
                 </script>
-                <!-- Bootstrap JS -->
                 <script src="{{ asset('js/buang.js') }}"></script>
             </body>
 

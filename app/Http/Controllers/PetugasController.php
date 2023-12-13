@@ -17,9 +17,27 @@ class PetugasController extends Controller
 {
     public function indexptg()
     {
+        $datasptg= User::where('role','petugas')->get();
+        $dataspg = User::where('role','pengguna')->get();
 
-        return view('petugas/indexptg');
+        return view('petugas/indexptg' ,
+    [
+        'datasptg' => $datasptg,
+        'dataspg' => $dataspg
+
+    ]);
     }
+
+
+    public function datasampahPtg()
+    {
+        $datas = buangsampah::where('status', 1)->get();
+
+        return view('banksampah/datasampah', [
+            'datas' => $datas,
+        ]);
+    }
+
     public function tampung()
     {
         $datas = buangsampah::where('user_id', Auth::user()->id)->get();
@@ -149,7 +167,7 @@ class PetugasController extends Controller
         $user->name = $request->name;
         $user->username = $request->username;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = bcrypt($request->password);
 
         $user->save();
 

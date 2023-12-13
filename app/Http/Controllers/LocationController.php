@@ -15,6 +15,14 @@ class LocationController extends Controller
     return view('maps', ['location' => $location]);
     }
 
+    public function petugasMap()
+    {
+        // Get all locations from the locations table
+    $locationPtg = DB::table('Users')->get();
+    // Send all locations to the view named maps
+    return view('mapsPtg', ['Users' => $locationPtg]);
+    }
+
     // public function gmaps()
     // {
     //     return view ('maps');
