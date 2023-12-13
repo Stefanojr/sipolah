@@ -92,11 +92,21 @@
                             <tr>
                                 <th>ID Transaksi</th>
                                 <th>Tanggal Transaksi</th>
-                                <th>Keterangan</th>
+                                <th>Petugas</th>
+                                <th>Sampah Organik</th>
+                                <th>Sampah An-Organik</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Data transaksi akan ditampilkan disini -->
+                            @foreach ($datas as $data)
+                                <tr>
+                                    <td>{{ $data->id_buang }}</td>
+                                    <td>{{ $data->tanggal }}</td>
+                                    <td>{{ $data->petugas->name }}</td>
+                                    <td>{{ $data->kapasitas_organik }}</td>
+                                    <td>{{ $data->kapasitas_anorganik }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -43,8 +43,13 @@ class BanksampahController extends Controller
 
     public function historybs()
     {
-        return view('banksampah/historybs');
+        $data = buangsampah::all();
+
+        return view('banksampah/historybs', [
+            'datas' => $data,
+        ]);
     }
+
     public function profilebs()
     {
         return view('banksampah/profilebs');

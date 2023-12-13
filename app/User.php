@@ -64,6 +64,6 @@ class User extends Authenticatable
      */
     public function petugas()
     {
-        return $this->hasOne(UserLangganan::class, 'petugas_id', 'id');
+        return $this->hasOne($this, $this->LanggananPetugas, 'id');
     }
 }
