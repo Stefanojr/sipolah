@@ -10,6 +10,7 @@ use App\User;
 use App\Http\Controllers\Hash;
 use App\UserLangganan;
 use Illuminate\Support\Facades\Validator;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PenggunaController extends Controller
 {
@@ -149,4 +150,38 @@ class PenggunaController extends Controller
             'status' => 'Berhasil menambahkan',
         ]);
     }
+
+    /**
+     *
+     */
+    public function invoice(Request $request)
+    {
+        $buang = buangsampah::where('user_id', Auth::user()->id)->get();
+        $data = [
+            'd' => $buang,
+        ];
+        $pdf = Pdf::loadView('pdf.show', $data);
+        $pdf->setPaper('a4', 'landscape');
+        $pdf->setOption([
+            'dpi' => 150,
+        ]);
+
+        return $pdf->download('invoice.pdf');
+    }
+
+    public function invoicep(Request $request)
+    {
+        $buang = buangsampah::where('user_id', Auth::user()->id)->get();
+        $data = [
+            'd' => $buang,
+        ];
+        // $pdf = Pdf::loadView('pdf.show', $data);
+
+        // return $pdf->download('invoice.pdf');
+
+        return view('pdf.show', [
+            'd' => $buang,
+        ]);
+    }
+
 }

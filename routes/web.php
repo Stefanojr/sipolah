@@ -54,6 +54,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/buang', 'BuangController@buangsam');
         Route::post('/updateProfile', 'PenggunaController@updateProfile')->name('profile.update');
 
+        Route::get('invoice', 'PenggunaController@invoice')->name('pengguna.invoice');
+        Route::get('invoicep', 'PenggunaController@invoicep')->name('pengguna.invoicep');
+
         Route::get('/pie-chart', [chartController::class, 'pieChart']);
     });
 
@@ -67,7 +70,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/historyptg', 'PetugasController@historyptg');
         Route::get('/profileptg', 'PetugasController@profileptg');
         Route::get('/logoutptg', 'PetugasController@logoutptg');
-
         Route::post('ambil-sampah', 'PetugasController@ambil_sampah')->name('petugas.ambil');
         Route::post('verived', 'PetugasController@verived')->name('petugas.verived');
     });
