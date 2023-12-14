@@ -20,9 +20,7 @@ class PenggunaController extends Controller
 
         // dd(Auth::user()->langganan);
         // dd($user->langganan);
-
-        $chart = new PieChartDashboard();
-        return view('pengguna/dashboard', ['chart' => $chart]);
+        return view('pengguna/dashboard');
     }
 
 

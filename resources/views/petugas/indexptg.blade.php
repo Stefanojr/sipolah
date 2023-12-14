@@ -108,6 +108,54 @@
 
             </table>
 
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">Pengambilan sampah organik dan anorganik</div>
+
+                            <div class="card-body">
+                                {!! $chart->container() !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {!! $chart->script() !!}
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">Lokasi Pengambilan Sampah</div>
+
+                            <div class="card-body">
+                                {!! $chart2->container() !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {!! $chart2->script() !!}
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">Grafik Langganan</div>
+
+                            <div class="card-body">
+                                {!! $chart3->container() !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {!! $chart3->script() !!}
+
             <body>
                 <div id="map-canvas"></div>
                 <script>

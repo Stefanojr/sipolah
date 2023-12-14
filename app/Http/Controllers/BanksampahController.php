@@ -33,11 +33,6 @@ class BanksampahController extends Controller
         ]);
     }
 
-    public function dpbs()
-    {
-        return view('banksampah/dpbs');
-    }
-
     public function locbs()
     {
         return view('banksampah/locbs');

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Charts\PieChartDashboard;
+use App\Charts\PieChartLok;
+use App\Charts\PieChartLan;
 use App\buangsampah;
 use App\Langganan;
 use App\Location;
@@ -17,14 +20,19 @@ class PetugasController extends Controller
 {
     public function indexptg()
     {
+        $chart = new PieChartDashboard();
+        $chart2 = new PieChartLok();
+        $chart3 = new PieChartLan();
         $datasptg= User::where('role','petugas')->get();
         $dataspg = User::where('role','pengguna')->get();
 
         return view('petugas/indexptg' ,
     [
         'datasptg' => $datasptg,
-        'dataspg' => $dataspg
-
+        'dataspg' => $dataspg,
+        'chart' => $chart,
+        'chart2' => $chart2,
+        'chart3' => $chart3
     ]);
     }
 

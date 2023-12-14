@@ -50,12 +50,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/dpbs">
-                        <i class="bi bi-credit-card" id="payment" ></i>
-                        <strong>Transaksi</strong>
-                    </a>
-                </li>
-                <li>
                     <a href="/historybs">
                         <i class="bi bi-clock-history"></i>
                         <strong>History</strong>
